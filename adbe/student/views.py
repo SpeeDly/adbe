@@ -5,7 +5,7 @@ from django.contrib.auth import login as auth_login
 from adbe.student.forms import NewStudentForm
 from adbe.student.models import Student
 from adbe.course.models import Membership
-# Create your views here.
+from adbe.task.models import Task
 
 
 def signup(request):
@@ -28,4 +28,8 @@ def profile(request):
     student = Student.objects.get(user_id=request.user.id)
     courses = Membership.objects.select_related().filter(specialty=student.specialty, semester=student.semester)
     courses = [c.course for c in courses]
-    return render(request, 'student/profile.html', {"student": student, "courses": courses})
+    tasks = Task.objects.filter(course__in=courses)
+    return render(request, 'student/profile.html', {"student": student,
+                                                    "courses": courses,
+                                                    "tasks": tasks
+                                                    })

@@ -115,6 +115,9 @@ h2{
 .signup{
     height: 100%;
     position: relative;
+    padding-top: 10px;
+    @include box-sizing(border-box);
+
     li{
         width: 100%;
         font-size: 20px;
@@ -127,6 +130,8 @@ h2{
         font-size: 18px;
         border: 1px solid $font_color;
         margin-bottom: 20px;
+        @include box-sizing(border-box);
+        padding-left: 10px;
     }
     select{
         width: 350px;
@@ -214,6 +219,7 @@ aside{
     }
     .courses{
         height: 40%;
+        overflow: auto;
         border-bottom: 2px solid $border_color;
     }
     .settings{
@@ -266,7 +272,7 @@ section>div{
     width: 100%;
     font-size: 20px;
     text-align: center;
-    margin-top: 50px;
+    top: 0px;
     z-index: 0;
 }
 .dz-success-mark, .dz-error-mark{
@@ -307,6 +313,44 @@ section>div{
     }
 }
 
+.course_options{
+    select{
+        color: $font_color;
+        background: white;
+        border: 2px solid $border_color;
+        // height: 30px;
+        font-size: 25px;
+        line-height: 25px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+.remove_field, .new_field{
+    display: inline-block;
+    overflow: hidden;
+    width: 150px;
+    height: 40px;
+    color: white;
+    background: #006000;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 20px;
+    border: 2px solid $border_color;
+    line-height: 40px;
+    margin-right: 20px;
+    &:before{
+        content: "+";
+        font-size: 26px;
+        font-weight: 600;
+        vertical-align: middle;
+    }
+}
+
+.remove_field{
+    background: red;
+}
+
 #uploaded table {
     width: 100%;
     margin-bottom: 40px;
@@ -331,7 +375,7 @@ section>div{
 }
 
 #addTask, .hint{
-    .task{
+    li{
         padding: 15px;
         min-height: 80px;
         width: auto;
