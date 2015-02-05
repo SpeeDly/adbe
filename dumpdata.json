@@ -1,0 +1,30 @@
+[
+    {
+        "model": "course.specialty",
+        "pk": 1,
+        "fields": {
+            "name": "Компютърни науки"
+        }
+    },
+    {
+        "model": "course.specialty",
+        "pk": 2,
+        "fields": {
+            "name": "Софтуерно инжинерство"
+        }
+    },
+    {
+        "model": "course.specialty",
+        "pk": 3,
+        "fields": {
+            "name": "Информационни технологии"
+        }
+    },
+    {
+        "model": "course.specialty",
+        "pk": 4,
+        "fields": {
+            "name": "Информатика"
+        }
+    }
+]

@@ -1,0 +1,81 @@
+{% extends "master.html" %}
+
+{% block meta %}
+    AdBe | Вписване на студент
+{% endblock meta %}
+
+    {% block stylesheet %}
+    {% endblock stylesheet %}
+
+    {% block content %}
+        <div class="box">
+            <form action="{% url 'signup_student' %}" method="POST" class="signup">
+                {% csrf_token %}
+                <ul>
+                    <li><label for="" class="main_label">
+                        {% if form.first_name.errors %}
+                            {{ form.first_name.errors }}
+                        {% endif %}
+                        Име</label></li>
+                    <li>
+                        {{ form.first_name }}
+                    </li>
+                    <li><label for="" class="main_label">
+                        {% if form.last_name.errors %}
+                            {{ form.last_name.errors }}
+                        {% endif %}
+                        Фамилия</label></li>
+                    <li>
+                        {{ form.last_name }}
+                    </li>
+                    <li><label for="" class="main_label">
+                        {% if form.email.errors %}
+                            {{ form.email.errors }}
+                        {% endif %}
+                        Емайл</label></li>
+                    <li>
+                        {{ form.email }}
+                    </li>
+                    <li><label for="" class="main_label">
+                        {% if form.password.errors %}
+                            {{ form.password.errors }}
+                        {% endif %}
+                        Парола</label></li>
+                    <li>
+                        {{ form.password }}
+                    </li>
+                    <li><label for="" class="main_label">
+                        {% if form.confirm_password.errors %}
+                            {{ form.confirm_password.errors }}
+                        {% endif %}
+                        Повтори паролата</label></li>
+                    <li>
+                        {{ form.confirm_password }}
+                    </li>
+                    <div class="container">
+                        <li><label for="" class="main_label">
+                            {% if form.specialty.errors %}
+                                {{ form.specialty.errors }}
+                            {% endif %}
+                            Специалност</label>
+                            {{ form.specialty }}
+                            </li>
+                        <li>
+                            <label for="" class="main_label">
+                            {% if form.semester.errors %}
+                                {{ form.semester.errors }}
+                            {% endif %}
+                            Семестър</label>
+                            {{ form.semester }}
+                        </li>
+                    </div>
+                    <li>
+                        <input type="submit" value="Регистрирай ме">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    {% endblock content %}
+
+    {% block scripts %}
+    {% endblock scripts %}

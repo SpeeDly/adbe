@@ -1,0 +1,309 @@
+{% extends "master.html" %}
+
+{% block title %}
+    AdBe | Профил на професор
+{% endblock title %}
+
+    {% block stylesheet %}
+    {% endblock stylesheet %}
+
+    {% block content %}
+        <div class="box">
+            <aside>
+                <div class="upload_wrapper">
+                    <a href="#upload">Kaчи материали</a>
+                </div>
+                <div class="courses">
+                    <ul>
+                    {% for course in courses %}
+                        <li><a class="openCourse" href="#course={{course.id}}">{{ course.name }}</a></li>
+                    {% endfor %}
+                        <li><a href="#createCourse" data-open="createCourse">Create new course</a></li>
+                    </ul>
+                </div>
+                <div class="settings">
+                    <ul>
+                        <li>Лични настройки</li>
+                        <li><a class="addTask" href="#addTask">Добави задача</a></li>
+                        <li>Добави лекция</li>
+                    </ul>
+                </div>
+            </aside>
+            <section>
+                <div id="success">
+                    Операцията беше успешна :)
+                </div>
+                <div id="error">
+                    Нещо се обърка ;(
+                </div>
+                <div id="default">
+                    Добре дошли в административният ни панел
+                </div>
+                <div id="uploadLectures">
+                    <form action="{% url 'upload' %}" method="POST" class="dropzone" id="my-awesome-dropzone" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="dz-message">
+                            Натиснете или драгнете тук необходимите файлове<br>
+                            <span class="note"></span>
+                            <div class="fallback">
+                                <input name="file" type="file" multiple />
+                            </div>
+                        </div>
+                        <select class="courses" name="course">
+                            {% for course in courses %}
+                                <option value="{{course.id}}">{{course.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Готово">
+                    </form>
+                </div>
+                <div id="createCourse">
+                    <form id="createCourseForm" action="{% url 'create_course' %}" method="POST">
+                        {% csrf_token %}
+                        {{ courseForm.specialtyData }}
+                        <div class="courseName">
+                            <label for="" class="main_label">
+                                {% if courseForm.name.errors %}
+                                    {{ courseForm.name.errors }}
+                                {% endif %}
+                                Име на курсът:</label>
+                                {{ courseForm.name }}
+                        </div>
+                        <a class="new_field" href="javascript:;">Добави ново поле</a>
+                        <a class="remove_field" href="javascript:;">Премахни поле</a>
+                        <div class="course_options" data-id="0">
+                            <select class="specialties">
+                                {% for specialty in specialties %}
+                                <option value="{{specialty.id}}">{{specialty.name}}</option>
+                                {% endfor %}
+                            </select>
+
+                            <select class="semesters">
+                                {% for semester in semesters %}
+                                    <option value="{{semester.0}}">{{semester.1}} семестър</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="submit" value="Готово">
+                    </form>
+                </div>
+                <div id="uploaded">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Име</th>
+                                <th>Качено</th>
+                                <th>Размер</th>
+                                <th>Свали</th>
+                                <th>Изтрий</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div id="addTask">
+                    <ul>
+                        <li class="newTask">
+                            <div class="icon"></div>
+                            <div class="select_course">
+                                <select class="task_courses">
+                                    {% for course in courses %}
+                                        <option value="{{course.id}}">{{course.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="description"><textarea id="id_description" cols="30" rows="10"></textarea></div>
+                            <div class="end">
+                                Краен срок: 
+                                <input type="time" value="00:00">
+                                <input type="date" value="2015-03-01">
+                            </div>
+                            <button class="save">Save</button>
+                        </li>
+                    {% for task in tasks %}
+                        <li class="task">
+                            <div class="coursename">
+                                {{task.course.name}}
+                            </div>
+                            <div class="description">
+                                {{task.description}}
+                            </div>
+                            <div class="date">
+                                <span>Изтича на {{task.expire}}</span><br>
+                                <span>Създадено на {{task.created}}</span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </section>
+        </div>
+    {% endblock content %}
+
+    {% block scripts %}
+    <script src="{{STATIC_URL}}js/dropzone.js"></script>
+    <script>
+    $("section>div").hide();
+
+    switch(location.hash){
+        case "#success":
+            $("#success").show();
+            break;
+        case "#error":
+            $("#error").show();
+            break;
+        case "#createCourse":
+            $("#createCourse").show();
+            break;
+        case "#upload":
+            $("#uploadLectures").show();
+            break;
+        case "#addTask":
+            $("#addTask").show();
+            break;
+        default:
+            if(location.hash.split("course=").length > 1){
+                $("#uploaded").show().find("tbody").html("");
+                $.ajax({
+                    type: "GET",
+                    url: "/course/get_course_files/" + location.hash.split("course=")[1],
+                }).done(handle_file_response);
+            }
+            else{
+                $("section div#default").show();            
+            }
+            break;
+    }
+
+
+        $('*[data-open="createCourse"]').click(function(){
+            $("section>div").hide();
+            $("#createCourse").show();
+        })
+
+        $('.upload_wrapper a').click(function(){
+            $("section>div").hide();
+            $("#uploadLectures").show();
+        })
+        
+        $(".new_field").click(function(){
+            var $last = $(".course_options").last();
+            $last.after($last.data("id", parseInt($last.data("id")) + 1).clone());
+        });
+
+        $(".remove_field").click(function(){
+            var $last = $(".course_options").last();
+            if($(".course_options").length > 1){
+                $last.remove();            
+            }
+        });
+
+        $(".addTask").click(function(){
+            $("section>div").hide();
+            $("#addTask").show();
+        })
+
+        $("#createCourseForm").submit(function(){
+            var data = [];
+            $(".specialties").each(function(){
+                var temp = {};
+                temp.id = $(this).parent().data("id");
+                temp.specialty = $(this).val();
+                temp.semester = $(this).parent().find(".semesters").val();
+                data.push(temp);
+            });
+            data = JSON.stringify(data);
+            $("#id_specialtyData").val(data);
+        });
+
+Dropzone.options.myAwesomeDropzone = false;
+Dropzone.autoDiscover = false;
+
+
+var myDropzone = new Dropzone("#my-awesome-dropzone", {
+    paramName: "file", // The name that will be used to transfer the file
+    maxFilesize: 2, // MB
+    createImageThumbnails: true,
+    thumbnailWidth: 100,
+    thumbnailHeight: 100,
+    autoProcessQueue: false,
+    addRemoveLinks: "remove",
+    dictRemoveFile: "Изтрий",
+    init: function() {
+        var myDropzone = this;
+        this.element.querySelector("#my-awesome-dropzone input[type=submit]").addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            myDropzone.processQueue();
+        });
+    },
+    success: function(){
+        $(location).attr('href', "/lector/profile/#success");
+        location.reload();
+    },
+    error: function(){
+        $(location).attr('href', "/lector/profile/#error");
+        // location.reload();
+    }
+});
+
+    $(".openCourse").click(function(){
+        $("section>div").hide();
+        $("#uploaded").show().find("tbody").html("");
+        var course_id = $(this).attr("href").split("=")[1];
+        $.ajax({
+            type: "GET",
+            url: "/course/get_course_files/" + course_id,
+        }).done(handle_file_response);
+    });
+
+    $("table").on("click", ".delete", function(){
+        var $this = $(this);
+        $.ajax({
+            type: "GET",
+            url: $(this).data("href"),
+        }).done(function() {
+            $this.closest("tr").remove();
+        });
+    })
+
+    function handle_file_response(data){
+        if(data.length === 0){
+            $("tbody").append("<tr><td colspan='5'>Тук нямате още качени материали ;(</td></tr>");                
+        }
+        data.forEach(function(e){
+            var el = "<tr><td>";
+            el += e.name;
+            el += "</td><td>";
+            el += e.created;
+            el += "</td><td>";
+            el += e.size;
+            el += "</td><td>";
+            el += "<a href=/media/" + e.path + ">Свали</a>";
+            el += "</td><td>";
+            el += "<a class='delete' href=" + location.href + " data-href='/lector/delete?path=" + e.path + "'>Изтрий</a>";
+            el += "</td></tr>";
+            $("tbody").append(el);
+        });
+    }
+
+    $(".save").click(function(){
+        var $task = $(".newTask")
+        var packet = {
+            "course": $task.find("select").val(),
+            "description": $task.find("textarea").val(),
+            "date": $task.find("input[type=date]").val(),
+            "time": $task.find("input[type=time]").val()
+        }
+        $.ajax({
+            type: "GET",
+            url: "/task/create/",
+            data: packet
+        }).done(function(){
+            location.reload();
+        });
+    })
+    </script>
+    {% endblock scripts %}

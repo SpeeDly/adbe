@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=League of Legends
+Comment=PlayOnLinux
+Type=Application
+Exec=/usr/share/playonlinux/playonlinux --run "League of Legends" %F
+Icon=/home/georgi/.PlayOnLinux//icones/full_size/League of Legends
+Name[fr_FR]=League of Legends
+StartupWMClass=lol.launcher.admin.exe
+Categories=Game;RolePlaying;

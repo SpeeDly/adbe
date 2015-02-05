@@ -1,0 +1,389 @@
+@import "compass/reset";
+@import "compass/css3";
+
+@import url(http://fonts.googleapis.com/css?family=Lato);
+
+$font_color: rgb(102, 102, 102);
+$border_color: rgb(221, 221, 221);
+$blue: #028AF4;
+
+header{
+    margin-top: 20px;
+}
+
+body{
+    color: $font_color;
+    line-height: 1.4em;
+    background: url("../img/background.png");
+    overflow: hidden;
+}
+
+a{
+    text-decoration: none;
+}
+
+footer{
+}
+
+.column {
+    width: 1024px;
+    margin: auto;
+    @include box-sizing(border-box);
+    overflow: hidden;
+    .logo{
+        float: left;
+        display: inline-block;
+    }
+    .info{
+        float: right;
+        position: relative;
+        bottom: 0px;
+        display: inline-block;
+        vertical-align: middle;
+        color: white;
+        margin-top: 20px;
+        span{
+            margin-right: 20px;
+            font-size: 20px;
+        }
+        .logout{
+            border: 3px solid rgba(102, 102, 102, 0.5);
+            display: inline-block;
+            border-radius: 99px;
+            text-align: center;
+            background: rgba(102, 102, 102, 0.3);
+            padding: 5px;
+            width: 80px;
+            color: white;
+            vertical-align: middle;
+            &:hover{
+                background: rgba(102, 102, 102, 1);
+            }
+        }
+    }
+}
+
+.box {
+    width: 1024px;
+    height: 550px;
+    background: white;
+    margin: auto;
+    border: 5px solid $border_color;
+    border-radius: 15px;
+    @include box-sizing(border-box);
+    overflow: hidden;
+}
+
+h1{
+    font-size: 42px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+h2{
+    font-size: 32px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+
+.index{
+    border-radius: 10px;
+    background: url("../img/background.png");
+    display: inline-block;
+    width: 300px;
+    color: white;
+    font-size: 26px;
+    text-align: center;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    margin-left: 140px;
+    &.student{
+    }
+}
+
+.enter{
+    color: $font_color;
+    font-weight: 600;
+    font-size: 72px;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+.signup{
+    height: 100%;
+    position: relative;
+    li{
+        width: 100%;
+        font-size: 20px;
+        text-align: center;
+        position: relative;
+    }
+    input{
+        height: 30px;
+        width: 250px;
+        font-size: 18px;
+        border: 1px solid $font_color;
+        margin-bottom: 20px;
+    }
+    select{
+        width: 350px;
+        text-align: center;
+        color: $font_color;
+        background: white;
+        border: 2px solid $border_color;
+        height: 50px;
+        font-size: 20px;
+        border-radius: 10px;
+    }
+    input[type="submit"]{
+        position: absolute;
+        bottom: -90px;
+        left: 0px;
+        width: 90%;
+        margin-left: 5%;
+        color: white;
+        background: $blue;
+        border: 0px;
+        height: 50px;
+        font-size: 25px;
+        border-radius: 10px;
+    }
+    label{
+        overflow: hidden;
+    }
+    .container{
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+        label{
+            display: block;
+        }
+        li{
+            display: inline-block;
+            width: auto;
+            #id_semester{
+                width: 100px;
+            }
+        }
+    }
+    .errorlist{
+        position: absolute;
+        top: 25px;
+        left: 600px;
+        width: 250px;
+        display: block;
+        color: red;
+        li{
+            display: block;
+        }
+    }
+}
+
+section, aside{
+    padding: 20px;
+    overflow: hidden;
+    @include box-sizing(border-box);
+}
+
+aside{
+    float: left;
+    width: 210px;
+    height: 100%;
+    border-right: 5px solid $border_color;
+
+    .upload_wrapper{
+        width: 100%;
+        height: 20%;
+        border-bottom: 2px solid $border_color;
+        text-align: center;
+        a{
+            display: block;
+            background: rgb(77, 77, 77);
+            color: white;
+            font-size: 24px;
+            text-align: center;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        img{
+            height: 100px;
+        }
+    }
+    .courses{
+        height: 40%;
+        border-bottom: 2px solid $border_color;
+    }
+    .settings{
+        height: 40%;
+    }
+}
+
+section{
+    width: 795px;
+    float: right;
+}
+
+section>div{
+    overflow: auto;
+    height: 500px;
+}
+
+.courseName{
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 60px;
+    label{
+        display: block;
+        margin-bottom: 20px;
+    }
+    input{
+        border: 2px solid rgb(137, 137, 137);
+        border-radius: 5px;
+        height: 40px;
+        width: 400px;
+        font-size: 24px;
+        color: $font_color;
+        padding: 5px;
+        @include box-sizing(border-box);
+    }
+}
+
+.dz-preview{
+    display: inline-block;
+    width: auto;
+    margin-top: 20px;
+    margin-left: 20px;
+    border: 1px solid $border_color;
+    z-index: 100;
+}
+.dz-message{
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 50px;
+    z-index: 0;
+}
+.dz-success-mark, .dz-error-mark{
+    display: none;
+}
+
+#uploadLectures{
+    position: relative;
+    height: 500px;
+}
+
+#my-awesome-dropzone{
+    border: 3px dashed $blue;
+    height: 350px;
+    input[type="submit"]{
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        color: white;
+        background: $blue;
+        border: 0px;
+        height: 50px;
+        font-size: 25px;
+        border-radius: 10px;
+    }
+    select{
+        position: absolute;
+        bottom: 80px;
+        left: 0px;
+        width: 100%;
+        color: $font_color;
+        background: white;
+        border: 2px solid $border_color;
+        height: 50px;
+        font-size: 25px;
+        border-radius: 10px;
+    }
+}
+
+#uploaded table {
+    width: 100%;
+    margin-bottom: 40px;
+    /*@include box-shadow(rgba(0, 0, 0, 0.5) 0px 2px 5px 0px);*/
+    border: 1px solid $border_color;
+    font-size: 16px;
+    th, td {
+        text-align: center;
+        color: $font_color;
+    }
+    th {
+        background: rgb(156, 165, 190);
+        color: white;
+        font-size: 16px;
+        vertical-align: center;
+    }
+    tr {
+        border-bottom: 2px solid $border_color;
+        height: 55px;
+        background: white;
+    }
+}
+
+#addTask, .hint{
+    .task{
+        padding: 15px;
+        min-height: 80px;
+        width: auto;
+        border: 2px solid $border_color;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .select_course select{
+        background: white;
+        border: 2px solid $border_color;
+        border-radius: 5px;
+        width: 250px;
+        font-size: 18px;
+    }
+    .newTask{
+        textarea{
+            margin-top: 10px;
+            width: 98%;
+            height: 20px;
+        }
+        .save{
+            border: 0px;
+            background: $blue;
+            color: white;
+            border-radius: 5px;
+            font-size: 20px;
+            padding: 5px;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+    }
+}
+
+.hint{
+    text-align: center;
+    .task{
+        border-left: 0px;
+        border-right: 0px;
+        border-radius: 0px;
+    }
+}
+
+
+.counter{
+    display: block;
+    font-size: 128px;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    position: relative;
+    top: 50px;
+}

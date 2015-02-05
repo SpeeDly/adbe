@@ -1,0 +1,21 @@
+{% extends "master.html" %}
+
+{% block meta %}
+    AdBe | Начална страница
+{% endblock meta %}
+
+    {% block stylesheet %}
+    {% endblock stylesheet %}
+
+    {% block content %}
+        <div class="box">
+            <h1>Регистрирай ме като</h1>
+            <a class="index student" href="{% url 'signup_student' %}">Студент</a>
+            <a class="index lector" href="{% url 'signup_lector' %}">Лектор</a>
+            <h2>Ако имаш вече регистрация</h2>
+            <a class="enter" href="{% url 'login' %}">ВХОД</a>
+        </div>
+    {% endblock content %}
+
+    {% block scripts %}
+    {% endblock scripts %}

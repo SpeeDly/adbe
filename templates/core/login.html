@@ -1,0 +1,42 @@
+{% extends "master.html" %}
+
+{% block meta %}
+    AdBe | Вписване на студент
+{% endblock meta %}
+
+    {% block stylesheet %}
+    {% endblock stylesheet %}
+
+    {% block content %}
+        <div class="box">
+            <form action="{% url 'login' %}" method="POST" class="signup">
+                {% csrf_token %}
+                <ul>
+                    {{ form.non_field_errors }}
+                    <li><label for="" class="main_label">
+                        {% if form.email.errors %}
+                            {{ form.email.errors }}
+                        {% endif %}
+                        Емайл</label></li>
+                    <li>
+                        {{ form.email }}
+                    </li>
+
+                    <li><label for="" class="main_label">
+                        {% if form.password.errors %}
+                            {{ form.password.errors }}
+                        {% endif %}
+                        Парола</label></li>
+                    <li>
+                        {{ form.password }}
+                    </li>
+                    <li>
+                        <input type="submit" value="Вкарай ме">
+                    </li>
+                </ul>
+            </form>
+        </div>
+    {% endblock content %}
+
+    {% block scripts %}
+    {% endblock scripts %}

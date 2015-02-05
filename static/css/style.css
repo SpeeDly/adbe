@@ -1,0 +1,370 @@
+@import url(http://fonts.googleapis.com/css?family=Lato);
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+html {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+q, blockquote {
+  quotes: none; }
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+a img {
+  border: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block; }
+
+header {
+  margin-top: 20px; }
+
+body {
+  color: #666666;
+  line-height: 1.4em;
+  background: url("../img/background.png");
+  overflow: hidden; }
+
+a {
+  text-decoration: none; }
+
+.column {
+  width: 1024px;
+  margin: auto;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden; }
+  .column .logo {
+    float: left;
+    display: inline-block; }
+  .column .info {
+    float: right;
+    position: relative;
+    bottom: 0px;
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+    margin-top: 20px; }
+    .column .info span {
+      margin-right: 20px;
+      font-size: 20px; }
+    .column .info .logout {
+      border: 3px solid rgba(102, 102, 102, 0.5);
+      display: inline-block;
+      border-radius: 99px;
+      text-align: center;
+      background: rgba(102, 102, 102, 0.3);
+      padding: 5px;
+      width: 80px;
+      color: white;
+      vertical-align: middle; }
+      .column .info .logout:hover {
+        background: #666666; }
+
+.box {
+  width: 1024px;
+  height: 550px;
+  background: white;
+  margin: auto;
+  border: 5px solid #dddddd;
+  border-radius: 15px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: hidden; }
+
+h1 {
+  font-size: 42px;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px; }
+
+h2 {
+  font-size: 32px;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 80px; }
+
+.index {
+  border-radius: 10px;
+  background: url("../img/background.png");
+  display: inline-block;
+  width: 300px;
+  color: white;
+  font-size: 26px;
+  text-align: center;
+  padding-top: 70px;
+  padding-bottom: 70px;
+  margin-left: 140px; }
+
+.enter {
+  color: #666666;
+  font-weight: 600;
+  font-size: 72px;
+  text-align: center;
+  display: inline-block;
+  width: 100%; }
+
+.signup {
+  height: 100%;
+  position: relative; }
+  .signup li {
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    position: relative; }
+  .signup input {
+    height: 30px;
+    width: 250px;
+    font-size: 18px;
+    border: 1px solid #666666;
+    margin-bottom: 20px; }
+  .signup select {
+    width: 350px;
+    text-align: center;
+    color: #666666;
+    background: white;
+    border: 2px solid #dddddd;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 10px; }
+  .signup input[type="submit"] {
+    position: absolute;
+    bottom: -90px;
+    left: 0px;
+    width: 90%;
+    margin-left: 5%;
+    color: white;
+    background: #028AF4;
+    border: 0px;
+    height: 50px;
+    font-size: 25px;
+    border-radius: 10px; }
+  .signup label {
+    overflow: hidden; }
+  .signup .container {
+    width: 100%;
+    overflow: hidden;
+    text-align: center; }
+    .signup .container label {
+      display: block; }
+    .signup .container li {
+      display: inline-block;
+      width: auto; }
+      .signup .container li #id_semester {
+        width: 100px; }
+  .signup .errorlist {
+    position: absolute;
+    top: 25px;
+    left: 600px;
+    width: 250px;
+    display: block;
+    color: red; }
+    .signup .errorlist li {
+      display: block; }
+
+section, aside {
+  padding: 20px;
+  overflow: hidden;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+aside {
+  float: left;
+  width: 210px;
+  height: 100%;
+  border-right: 5px solid #dddddd; }
+  aside .upload_wrapper {
+    width: 100%;
+    height: 20%;
+    border-bottom: 2px solid #dddddd;
+    text-align: center; }
+    aside .upload_wrapper a {
+      display: block;
+      background: #4d4d4d;
+      color: white;
+      font-size: 24px;
+      text-align: center;
+      border-radius: 10px;
+      padding: 20px; }
+    aside .upload_wrapper img {
+      height: 100px; }
+  aside .courses {
+    height: 40%;
+    border-bottom: 2px solid #dddddd; }
+  aside .settings {
+    height: 40%; }
+
+section {
+  width: 795px;
+  float: right; }
+
+section > div {
+  overflow: auto;
+  height: 500px; }
+
+.courseName {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 60px; }
+  .courseName label {
+    display: block;
+    margin-bottom: 20px; }
+  .courseName input {
+    border: 2px solid #898989;
+    border-radius: 5px;
+    height: 40px;
+    width: 400px;
+    font-size: 24px;
+    color: #666666;
+    padding: 5px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+
+.dz-preview {
+  display: inline-block;
+  width: auto;
+  margin-top: 20px;
+  margin-left: 20px;
+  border: 1px solid #dddddd;
+  z-index: 100; }
+
+.dz-message {
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 50px;
+  z-index: 0; }
+
+.dz-success-mark, .dz-error-mark {
+  display: none; }
+
+#uploadLectures {
+  position: relative;
+  height: 500px; }
+
+#my-awesome-dropzone {
+  border: 3px dashed #028AF4;
+  height: 350px; }
+  #my-awesome-dropzone input[type="submit"] {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    color: white;
+    background: #028AF4;
+    border: 0px;
+    height: 50px;
+    font-size: 25px;
+    border-radius: 10px; }
+  #my-awesome-dropzone select {
+    position: absolute;
+    bottom: 80px;
+    left: 0px;
+    width: 100%;
+    color: #666666;
+    background: white;
+    border: 2px solid #dddddd;
+    height: 50px;
+    font-size: 25px;
+    border-radius: 10px; }
+
+#uploaded table {
+  width: 100%;
+  margin-bottom: 40px;
+  /*@include box-shadow(rgba(0, 0, 0, 0.5) 0px 2px 5px 0px);*/
+  border: 1px solid #dddddd;
+  font-size: 16px; }
+  #uploaded table th, #uploaded table td {
+    text-align: center;
+    color: #666666; }
+  #uploaded table th {
+    background: #9ca5be;
+    color: white;
+    font-size: 16px;
+    vertical-align: center; }
+  #uploaded table tr {
+    border-bottom: 2px solid #dddddd;
+    height: 55px;
+    background: white; }
+
+#addTask .task, .hint .task {
+  padding: 15px;
+  min-height: 80px;
+  width: auto;
+  border: 2px solid #dddddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  position: relative; }
+#addTask .select_course select, .hint .select_course select {
+  background: white;
+  border: 2px solid #dddddd;
+  border-radius: 5px;
+  width: 250px;
+  font-size: 18px; }
+#addTask .newTask textarea, .hint .newTask textarea {
+  margin-top: 10px;
+  width: 98%;
+  height: 20px; }
+#addTask .newTask .save, .hint .newTask .save {
+  border: 0px;
+  background: #028AF4;
+  color: white;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 5px;
+  position: absolute;
+  top: 10px;
+  right: 20px; }
+
+.hint {
+  text-align: center; }
+  .hint .task {
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px; }
+
+.counter {
+  display: block;
+  font-size: 128px;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  position: relative;
+  top: 50px; }

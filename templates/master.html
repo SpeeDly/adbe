@@ -1,0 +1,51 @@
+{% load url from future %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}{% endblock title %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <meta name="robots" content="noindex">
+        <!--CSS block-->
+        <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico" />
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+
+        {% block stylesheets %}
+        
+        {% endblock stylesheets %}
+
+    </head>
+    <body>
+        <!-- Header -->        
+        <header>
+            <div class="column">
+                <img src="{{STATIC_URL}}img/logo.png" alt="logo" class="logo">
+                {% if request.user.is_authenticated %}
+                <div class="info">
+                    <span>Здравей {{request.user.first_name}}!</span>
+                    <a class="logout" href="{% url 'logout' %}">Изход</a>            
+                </div>
+                {% endif %}
+            </div>
+        </header>
+        <!-- Content -->        
+        <div id="content">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <!-- Footer -->
+<!--         <footer>
+            Този проект бе направен през 2015 година в рамките на 3 дни.
+        </footer> -->
+
+    <!-- Script block -->
+    <script src="{{STATIC_URL}}js/jquery.js"></script>
+    {% block scripts %}
+    {% endblock scripts %}
+    </body>
+</html>
