@@ -25,3 +25,4 @@ class Lecture(models.Model):
 class LectorCourse(models.Model):
     lector = models.ForeignKey(Lector)
     course = models.ForeignKey(Course)
+    approver = models.ForeignKey(Lector, related_name="approver", blank=True, null=True)

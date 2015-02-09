@@ -1,75 +1,87 @@
     $("section>div").hide();
 
-    switch(location.hash){
-        case "#success":
-            $("#success").show();
-            break;
-        case "#error":
-            $("#error").show();
-            break;
-        case "#createCourse":
-            $("#createCourse").show();
-            break;
-        case "#upload":
-            $("#uploadLectures").show();
-            break;
-        case "#addTask":
-            $("#addTask").show();
-            break;
-        default:
-            if(location.hash.split("course=").length > 1){
-                $("#uploaded").show().find("tbody").html("");
-                $.ajax({
-                    type: "GET",
-                    url: "/course/get_course_files/" + location.hash.split("course=")[1],
-                }).done(handle_file_response);
-            }
-            else{
-                $("section div#default").show();            
-            }
-            break;
+
+    if(location.hash.split("course=").length > 1){
+        $("#uploaded").show().find("tbody").html("");
+        $.ajax({
+            type: "GET",
+            url: "/course/get_course_files/" + location.hash.split("course=")[1],
+        }).done(handle_file_response);
+    }
+    else if(location.hash == ""){
+        $("section div#default").show();            
+    }
+    else{
+        $(location.hash).show();
     }
 
 
-        $('*[data-open="createCourse"]').click(function(){
-            $("section>div").hide();
-            $("#createCourse").show();
-        })
+    $('*[data-open="createCourse"]').click(function(){
+        $("section>div").hide();
+        $("#createCourse").show();
+    })
 
-        $('.upload_wrapper a').click(function(){
-            $("section>div").hide();
-            $("#uploadLectures").show();
-        })
-        
-        $(".new_field").click(function(){
-            var $last = $(".course_options").last();
-            $last.after($last.data("id", parseInt($last.data("id")) + 1).clone());
+    $('.upload_wrapper a').click(function(){
+        $("section>div").hide();
+        $("#uploadLectures").show();
+    })
+    
+    $(".new_field").click(function(){
+        var $last = $(".course_options").last();
+        $last.after($last.data("id", parseInt($last.data("id")) + 1).clone());
+    });
+
+    $(".remove_field").click(function(){
+        var $last = $(".course_options").last();
+        if($(".course_options").length > 1){
+            $last.remove();            
+        }
+    });
+
+    $(".addTask").click(function(){
+        $("section>div").hide();
+        $("#addTask").show();
+    })
+
+    $("#createCourseForm").submit(function(event){
+        var data = [];
+        $(".specialties").each(function(){
+            var temp = {};
+            temp.id = $(this).parent().data("id");
+            temp.specialty = $(this).val();
+            temp.semester = $(this).parent().find(".semesters").val();
+            data.push(temp);
         });
-
-        $(".remove_field").click(function(){
-            var $last = $(".course_options").last();
-            if($(".course_options").length > 1){
-                $last.remove();            
-            }
-        });
-
-        $(".addTask").click(function(){
-            $("section>div").hide();
-            $("#addTask").show();
-        })
-
-        $("#createCourseForm").submit(function(){
-            var data = [];
-            $(".specialties").each(function(){
-                var temp = {};
-                temp.id = $(this).parent().data("id");
-                temp.specialty = $(this).val();
-                temp.semester = $(this).parent().find(".semesters").val();
-                data.push(temp);
+        data = JSON.stringify(data);
+        if($(this).data("checked") == undefined){
+            event.preventDefault();
+            $.ajax({
+                type: "GET",
+                url: "/course/check_name/",
+                data: {"course_name": $("#createCourseForm #id_name").val()}
+            }).done(function(data){
+                console.log(data);
+                if(data.isExist){
+                    $("#diag").show();
+                }
+                else{
+                    $("#createCourseForm").data("checked", true).submit();
+                }
             });
-            data = JSON.stringify(data);
-            $("#id_specialtyData").val(data);
-        });
+        }
+
+        $("#id_specialtyData").val(data);
+    });
+
+    $("#diag a").click(function(){
+        var $this = $(this);
+        if($this.hasClass("close") || $this.hasClass("no")){
+            $("#diag").hide();
+        }
+        else if($this.hasClass("yes")){
+            $("#createCourseForm").data("checked", true).submit();
+        }
+    })
 
 Dropzone.options.myAwesomeDropzone = false;
 Dropzone.autoDiscover = false;
@@ -124,7 +136,7 @@ var myDropzone = new Dropzone("#my-awesome-dropzone", {
 
     function handle_file_response(data){
         if(data.length === 0){
-            $("tbody").append("<tr><td colspan='5'>Тук нямате още качени материали ;(</td></tr>");                
+            $("#uploaded tbody").append("<tr><td colspan='6'>Тук нямате още качени материали ;(</td></tr>");                
         }
         data.forEach(function(e){
             var el = "<tr><td>";
@@ -132,13 +144,15 @@ var myDropzone = new Dropzone("#my-awesome-dropzone", {
             el += "</td><td>";
             el += e.created;
             el += "</td><td>";
+            el += e.uploaded_by;
+            el += "</td><td>";
             el += e.size;
             el += "</td><td>";
             el += "<a href=/media/" + e.path + ">Свали</a>";
             el += "</td><td>";
             el += "<a class='delete' href=" + location.href + " data-href='/lector/delete?path=" + e.path + "'>Изтрий</a>";
             el += "</td></tr>";
-            $("tbody").append(el);
+            $("#uploaded tbody").append(el);
         });
     }
 
@@ -157,4 +171,9 @@ var myDropzone = new Dropzone("#my-awesome-dropzone", {
         }).done(function(){
             location.reload();
         });
+    })
+
+    $("a[href='#controlCourses']").click(function(){
+        $("section>div").hide();
+        $("#controlCourses").show();
     })

@@ -38,17 +38,20 @@ def signup(request):
 def profile(request):
     lector = Lector.objects.get(user_id=request.user.id)
     specialties = Specialty.objects.all()
-    courses = LectorCourse.objects.filter(lector=lector)
+    courses = LectorCourse.objects.exclude(approver__isnull=True).filter(lector=lector)
     courses = [c.course for c in courses]
     courseForm = NewCourseForm()
     tasks = Task.objects.filter(lector=lector).order_by("-created")
+    requests = LectorCourse.objects.exclude(lector=lector).filter(course__in=courses, approver__isnull=True)
     return render(request, 'lector/profile.html', {
         "lector": lector, 
         "specialties": specialties, 
         "courses": courses,
         "tasks": tasks,
         "semesters": list(SEMESTER),
-        "courseForm": courseForm})
+        "courseForm": courseForm,
+        "requests": list(requests)
+        })
 
 
 def upload(request):
@@ -66,7 +69,6 @@ def upload(request):
 
 def delete(request):
     path = request.GET.get("path")
-    print(path)
     default_storage.delete(path)
     Lecture.objects.get(path=path).delete()
 

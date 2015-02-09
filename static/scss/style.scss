@@ -332,7 +332,7 @@ section>div{
     width: 150px;
     height: 40px;
     color: white;
-    background: #006000;
+    background: rgb(73, 187, 153);
     text-align: center;
     border-radius: 10px;
     font-size: 20px;
@@ -348,10 +348,10 @@ section>div{
 }
 
 .remove_field{
-    background: red;
+    background: rgb(174, 68, 96);
 }
 
-#uploaded table {
+#uploaded table, #controlCourses table {
     width: 100%;
     margin-bottom: 40px;
     /*@include box-shadow(rgba(0, 0, 0, 0.5) 0px 2px 5px 0px);*/
@@ -430,4 +430,102 @@ section>div{
     margin: auto;
     position: relative;
     top: 50px;
+}
+
+#createCourseForm{
+    position: relative;
+    height: 100%;
+    input[type="submit"]{
+        width: 100%;
+        color: white;
+        background: $blue;
+        border: 0px;
+        height: 50px;
+        font-size: 25px;
+        border-radius: 10px;
+    }
+}
+
+#diag{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    .wrapper{
+        position: relative;
+        width: 450px;
+        height: 250px;
+        margin: auto;
+        margin-top: 150px;
+        background: $border_color;
+        border: 5px solid white;
+        border-radius: 10px;
+        @include box-sizing(border-box);
+        padding: 20px;
+        .close{
+            color: black;
+            @include rotate(45deg);
+            font-size: 32px;
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            border: 1px solid $border_color;
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            border-radius: 99px;
+            line-height: 30px;
+            background: white;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .text{
+            font-size: 20px;
+            text-align: center;
+            line-height: 30px;
+        }
+        .options{
+            margin: auto;
+            width: 240px;
+            height: 60px;
+            display: block;
+            margin-top: 50px;
+            a{
+                font-size: 24px;
+                color: white;
+                border: white;
+                display: inline-block;
+                width: 100px;
+                height: 50px;
+                text-align: center;
+                background: white;
+                border-radius: 10px;
+                border: 2px solid white;
+                line-height: 50px;
+                -webkit-transition: border-color 1s, background 1s, color 1s;
+                transition: border-color 1s, background 1s, color 1s;
+                &.no{
+                    margin-left: 20px;
+                    border-color: rgb(174, 68, 96);
+                    color: rgb(174, 68, 96);
+                    &:hover{
+                        border-color: white;
+                        color: white;
+                        background: rgb(174, 68, 96);
+                    }
+                }
+                &.yes{
+                    border-color: rgb(73, 187, 153);
+                    color: rgb(73, 187, 153);
+                    &:hover{
+                        border-color: white;
+                        color: white;
+                        background: rgb(73, 187, 153);
+                    }
+                }
+            }
+        }
+    }
 }

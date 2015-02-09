@@ -329,7 +329,7 @@ section > div {
   width: 150px;
   height: 40px;
   color: white;
-  background: #006000;
+  background: #49bb99;
   text-align: center;
   border-radius: 10px;
   font-size: 20px;
@@ -343,23 +343,23 @@ section > div {
     vertical-align: middle; }
 
 .remove_field {
-  background: red; }
+  background: #ae4460; }
 
-#uploaded table {
+#uploaded table, #controlCourses table {
   width: 100%;
   margin-bottom: 40px;
   /*@include box-shadow(rgba(0, 0, 0, 0.5) 0px 2px 5px 0px);*/
   border: 1px solid #dddddd;
   font-size: 16px; }
-  #uploaded table th, #uploaded table td {
+  #uploaded table th, #uploaded table td, #controlCourses table th, #controlCourses table td {
     text-align: center;
     color: #666666; }
-  #uploaded table th {
+  #uploaded table th, #controlCourses table th {
     background: #9ca5be;
     color: white;
     font-size: 16px;
     vertical-align: center; }
-  #uploaded table tr {
+  #uploaded table tr, #controlCourses table tr {
     border-bottom: 2px solid #dddddd;
     height: 55px;
     background: white; }
@@ -408,3 +408,94 @@ section > div {
   margin: auto;
   position: relative;
   top: 50px; }
+
+#createCourseForm {
+  position: relative;
+  height: 100%; }
+  #createCourseForm input[type="submit"] {
+    width: 100%;
+    color: white;
+    background: #028AF4;
+    border: 0px;
+    height: 50px;
+    font-size: 25px;
+    border-radius: 10px; }
+
+#diag {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background: rgba(0, 0, 0, 0.7);
+  display: none; }
+  #diag .wrapper {
+    position: relative;
+    width: 450px;
+    height: 250px;
+    margin: auto;
+    margin-top: 150px;
+    background: #dddddd;
+    border: 5px solid white;
+    border-radius: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 20px; }
+    #diag .wrapper .close {
+      color: black;
+      -moz-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+      font-size: 32px;
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      border: 1px solid #dddddd;
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      border-radius: 99px;
+      line-height: 30px;
+      background: white;
+      vertical-align: middle;
+      text-align: center; }
+    #diag .wrapper .text {
+      font-size: 20px;
+      text-align: center;
+      line-height: 30px; }
+    #diag .wrapper .options {
+      margin: auto;
+      width: 240px;
+      height: 60px;
+      display: block;
+      margin-top: 50px; }
+      #diag .wrapper .options a {
+        font-size: 24px;
+        color: white;
+        border: white;
+        display: inline-block;
+        width: 100px;
+        height: 50px;
+        text-align: center;
+        background: white;
+        border-radius: 10px;
+        border: 2px solid white;
+        line-height: 50px;
+        -webkit-transition: border-color 1s, background 1s, color 1s;
+        transition: border-color 1s, background 1s, color 1s; }
+        #diag .wrapper .options a.no {
+          margin-left: 20px;
+          border-color: #ae4460;
+          color: #ae4460; }
+          #diag .wrapper .options a.no:hover {
+            border-color: white;
+            color: white;
+            background: #ae4460; }
+        #diag .wrapper .options a.yes {
+          border-color: #49bb99;
+          color: #49bb99; }
+          #diag .wrapper .options a.yes:hover {
+            border-color: white;
+            color: white;
+            background: #49bb99; }

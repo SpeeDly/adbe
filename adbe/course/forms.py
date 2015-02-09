@@ -31,14 +31,13 @@ class NewCourseForm(ModelForm):
 
         data = self.cleaned_data
         name = data["name"]
-        print(name)
-        course = Course.objects.create(name=name)
+        course, created = Course.objects.get_or_create(name=name)
         data["specialtyData"] = json.loads(data["specialtyData"])
         for d in data["specialtyData"]:
-            Membership.objects.create(
+            Membership.objects.get_or_create(
                 course = course,
                 specialty_id = d["specialty"],
                 semester = d["semester"]
                 )
         
-        return course
+        return (course, created)

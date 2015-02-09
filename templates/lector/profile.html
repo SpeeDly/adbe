@@ -11,7 +11,7 @@
         <div class="box">
             <aside>
                 <div class="upload_wrapper">
-                    <a href="#upload">Kaчи материали</a>
+                    <a href="#uploadLectures">Kaчи материали</a>
                 </div>
                 <div class="courses">
                     <ul>
@@ -25,7 +25,7 @@
                     <ul>
                         <!-- <li>Лични настройки</li> -->
                         <li><a class="addTask" href="#addTask">Добави задача</a></li>
-                        <!-- <li>Добави лекция</li> -->
+                        <li><a href="#controlCourses">Запитвания за достъп-{{requests|length}}</a></li>
                     </ul>
                 </div>
             </aside>
@@ -93,6 +93,7 @@
                             <tr>
                                 <th>Име</th>
                                 <th>Качено</th>
+                                <th>От</th>
                                 <th>Размер</th>
                                 <th>Свали</th>
                                 <th>Изтрий</th>
@@ -138,11 +139,49 @@
                     {% endfor %}
                     </ul>
                 </div>
+                <div id="controlCourses">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Курс</th>
+                                <th>Искащ достъп</th>
+                                <th>Разреши</th>
+                                <th>Забрани</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for r in requests %}
+                            <tr>
+                                <td>{{ r.course.name }}</td>
+                                <td>{{ r.lector.user.first_name }} {{ r.lector.user.last_name }}</td>
+                                <td><a href="/course/approve/{{r.id}}">Разреши</a></td>
+                                <td><a href="/course/reject/{{r.id}}">Забрани</a></td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4">
+                                    Няма запитвания ;(
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </section>
         </div>
     {% endblock content %}
 
     {% block scripts %}
+    <div id="diag">
+        <div class="wrapper">
+            <a href="javascript:;" class="close">+</a>
+            <div class="text">Вече съществува курс с такова име. Искате ли да поискате права за този курс?</div>
+            <div class="options">
+                <a href="javascript:;" class="yes">Да</a>
+                <a href="javascript:;" class="no">Не</a>
+            </div>
+        </div>
+    </div>
     <script src="{{STATIC_URL}}js/dropzone.js"></script>
     <script src="{{STATIC_URL}}js/lector.js"></script>
     {% endblock scripts %}

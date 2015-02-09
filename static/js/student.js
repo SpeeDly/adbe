@@ -1,34 +1,18 @@
 $("section>div").hide();
 
-switch(location.hash){
-    case "#success":
-        $("#success").show();
-        break;
-    case "#error":
-        $("#error").show();
-        break;
-    case "#createCourse":
-        $("#createCourse").show();
-        break;
-    case "#upload":
-        $("#uploadLectures").show();
-        break;
-    case "#addTask":
-        $("#addTask").show();
-        break;
-    default:
-        if(location.hash.split("course=").length > 1){
-            $("#uploaded").show().find("tbody").html("");
-            $.ajax({
-                type: "GET",
-                url: "/course/get_course_files/" + location.hash.split("course=")[1],
-            }).done(handle_file_response);
-        }
-        else{
-            $("section div#default").show();            
-        }
-        break;
-}
+    if(location.hash.split("course=").length > 1){
+        $("#uploaded").show().find("tbody").html("");
+        $.ajax({
+            type: "GET",
+            url: "/course/get_course_files/" + location.hash.split("course=")[1],
+        }).done(handle_file_response);
+    }
+    else if(location.hash == ""){
+        $("section div#default").show();            
+    }
+    else{
+        $(location.hash).show();
+    }
 
 
     $('*[data-open="createCourse"]').click(function(){

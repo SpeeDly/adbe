@@ -18,6 +18,7 @@ def home(request):
             return redirect("lector_profile")
     return render(request, 'core/home.html', {})
 
+
 def login(request):
     if request.method == "POST":
 

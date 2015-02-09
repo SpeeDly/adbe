@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Counter-Strike 1.6
+Exec=env WINEPREFIX="/home/georgi/.wine" wine C:\\\\Program\\ Files\\ \\(x86\\)\\\\Counter-Strike\\ 1.6\\\\hl.exe -game\\ cstrike
+Type=Application
+StartupNotify=true
+Path=/home/georgi/.wine/dosdevices/c:/Program Files (x86)/Counter-Strike 1.6
+Icon=46F8_cstrike.0
